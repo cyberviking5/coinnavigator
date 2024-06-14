@@ -3,6 +3,7 @@ import Button from "../Button";
 import TemporaryDrawer from "./drawer";
 import "./styles.css";
 import Switch from "@mui/material/Switch";
+import { Link } from "react-router-dom";
 
 function Header() {
   return (
@@ -11,18 +12,18 @@ function Header() {
         CryptoTracker<span style={{ color: "var(--blue)" }}>.</span>
       </h1>
       <div className="links">
-        <a href="/">
+        <Link to="/">
           <p className="link">Home</p>
-        </a>
-        <a href="/compare">
+        </Link>
+        <Link to="/compare">
           <p className="link">Compare</p>
-        </a>
-        <a href="/watchlist">
+        </Link>
+        <Link to="/watchlist">
           <p className="link">Watchlist</p>
-        </a>
-        <a href="/dashboard">
-          <Button text={"dashboard"} />
-        </a>
+        </Link>
+        <Link to="/dashboard">
+          <Button text={"dashboard"}onClick={()=>{console.log("h")}} />
+        </Link>
       </div>
       <div className="drawer-component">
         <TemporaryDrawer />
