@@ -14,7 +14,7 @@ import { settingCoinObject } from "../functions/settingCoinObject";
 
 function Compare() {
   const [allCoins, setAllCoins] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   // id states
   const [crypto1, setCrypto1] = useState("bitcoin");
   const [crypto2, setCrypto2] = useState("ethereum");

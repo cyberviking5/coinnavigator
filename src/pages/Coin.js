@@ -16,7 +16,7 @@ import { settingCoinObject } from "../functions/settingCoinObject";
 function Coin() {
   const { id } = useParams();
   const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [chartData, setChartData] = useState({ labels: [], datasets: [{}] });
   const [coin, setCoin] = useState({});
   const [days, setDays] = useState(30);
@@ -31,7 +31,7 @@ function Coin() {
   const getData = async () => {
     setLoading(true);
     let coinData = await getCoinData(id, setError);
-    // console.log("Coin DATA>>>>", coinData);
+    console.log("Coin DATA>>>>", coinData);
     settingCoinObject(coinData, setCoin);
     if (coinData) {
       const prices = await getPrices(id, days, priceType, setError);

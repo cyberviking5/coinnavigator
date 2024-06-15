@@ -4,15 +4,16 @@ import TrendingDownRoundedIcon from "@mui/icons-material/TrendingDownRounded";
 import TrendingUpRoundedIcon from "@mui/icons-material/TrendingUpRounded";
 import { motion } from "framer-motion";
 import StarOutlineIcon from "@mui/icons-material/StarOutline";
+import { saveItemToWatchlist } from "../../../functions/saveItemToWatchlist";
 import StarIcon from "@mui/icons-material/Star";
-import { Link } from "react-router-dom";
+import { removeItemToWatchlist } from "../../../functions/removeItemToWatchlist";
 
 function Grid({ coin, delay }) {
   const watchlist = JSON.parse(localStorage.getItem("watchlist"));
   const [isCoinAdded, setIsCoinAdded] = useState(watchlist?.includes(coin.id));
 
   return (
-    <Link to={`/coin/${coin.id}`}>
+    <a href={`/coin/${coin.id}`}>
       <motion.div
         className={`grid ${coin.price_change_percentage_24h < 0 && "grid-red"}`}
         initial={{ opacity: 0, y: 50 }}
@@ -30,6 +31,16 @@ function Grid({ coin, delay }) {
               className={`watchlist-icon ${
                 coin.price_change_percentage_24h < 0 && "watchlist-icon-red"
               }`}
+              onClick={(e) => {
+                if (isCoinAdded) {
+                  // remove coin
+
+                  removeItemToWatchlist(e, coin.id, setIsCoinAdded);
+                } else {
+                  setIsCoinAdded(true);
+                  saveItemToWatchlist(e, coin.id);
+                }
+              }}
             >
               {isCoinAdded ? <StarIcon /> : <StarOutlineIcon />}
             </div>
@@ -70,7 +81,7 @@ function Grid({ coin, delay }) {
           Market Capital : ${coin.market_cap.toLocaleString()}
         </p>
       </motion.div>
-    </Link>
+    </a>
   );
 }
 
